@@ -1,0 +1,110 @@
+<div class="ui header">
+    {{title}}
+    <action-buttons [selected]="selected" (addEvent)="addCertificate()" (editEvent)="editCertificate(selected[0])" (deleteEvent)="deleteCertificate()"></action-buttons>
+</div>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Exp</th>
+            <th>Company</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let certificate of certificates">
+            <td>{{certificate.name}}</td>
+            <td>{{certificate.exp}}</td>
+            <td>{{certificate.company}}</td>
+            <td>{{certificate.department}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="3">
+                <div class="ui right floated pagination menu">
+                    <a class="icon item">
+                        <i class="left chevron icon"></i>
+                    </a>
+                    <a class="item">1</a>
+                    <a class="item">2</a>
+                    <a class="item">3</a>
+                    <a class="item">4</a>
+                    <a class="icon item">
+                        <i class="right chevron icon"></i>
+                    </a>
+                </div>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Add Modal -->
+<div class="ui modal" id="addModal">
+    <i class="close icon"></i>
+    <div class="header">
+        Add Certificates
+    </div>
+    <div class="content">
+        <form class="dropzone" id="dropzone" dropzone="dropzoneConfig" ></form>
+        <div class="ui fluid input">
+            <input id="newCompany" type="text" placeholder="Name">
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+            Save
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<!-- -->
+
+
+<!-- Edit Modal -->
+<div class="ui modal" id="editModal">
+    <i class="close icon"></i>
+    <div class="header">
+        Edit Company
+    </div>
+    <div class="content">
+        <div class="ui fluid input">
+            <input id="editCompany" type="text" placeholder="Name">
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+            Save
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<!-- -->
+
+<!-- Delete Modal -->
+<div class="ui modal" id="deleteModal">
+    <i class="close icon"></i>
+    <div class="header">
+        <div *ngIf="selected.length === 1">Delete Certifice</div>
+        <div *ngIf="selected.length > 1">Delete Certifices</div>
+    </div>
+    <div class="content">
+        Are you sure ?
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+            Delete
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<!-- -->

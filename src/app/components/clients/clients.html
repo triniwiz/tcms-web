@@ -1,0 +1,179 @@
+<div class="ui header">
+  {{title}}
+  <action-buttons (addEvent)="addClient()" (deleteEvent)="deleteClient()" (editEvent)="editClient(selected[0])" [selected]="selected"></action-buttons>
+</div>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th class="collapsing">
+        <div id="checkAll" class="ui fitted checkbox">
+          <input [ngModel]="allSelected" (ngModelChange)="selectAll()" type="checkbox">
+          <label></label>
+        </div>
+      </th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [ngClass]="{'selectable':selected[client.id]}" *ngFor="let client of clients | adminFilter">
+      <td class="collapsing">
+        <div class="ui fitted checkbox company-checkbox">
+          <input (change)="itemSelected(client.id,$event.target.checked)" type="checkbox">
+          <label></label>
+        </div>
+      </td>
+      <td>{{client.firstName}}</td>
+      <td>{{client.lastName}}</td>
+      <td>{{client.email}}</td>
+      <td>{{client.company | companyName:companies}}</td>
+    </tr>
+  </tbody>
+  <!-- <tfoot>
+    <tr>
+      <th colspan="3">
+        <div class="ui right floated pagination menu">
+          <a class="icon item">
+            <i class="left chevron icon"></i>
+          </a>
+          <a class="item">1</a>
+          <a class="item">2</a>
+          <a class="item">3</a>
+          <a class="item">4</a>
+          <a class="icon item">
+            <i class="right chevron icon"></i>
+          </a>
+        </div>
+      </th>
+    </tr>
+  </tfoot>-->
+</table>
+
+<!-- Add Modal -->
+<div class="ui modal" id="addModal">
+  <i class="close icon"></i>
+  <div class="header">
+    Add Client
+  </div>
+  <div class="content">
+
+    <form id="newClientForm" class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" name="firstName" placeholder="First Name">
+        </div>
+
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Last Name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input name="email" type="text" placeholder="email">
+      </div>
+
+      <div class="field">
+        <label>Company</label>
+        <select name="company" class="ui dropdown">
+      <option value="">Select Company</option>
+      <option *ngFor="let item of companies" [value]="item.id">{{item.name}}</option>
+    </select>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Password">
+      </div>
+    </form>
+
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+<!-- -->
+
+
+<!-- Edit Modal -->
+<div class="ui modal" id="editModal">
+  <i class="close icon"></i>
+  <div class="header">
+    Edit Client
+  </div>
+  <div class="content">
+    <form id="editClientForm" class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" name="firstName" placeholder="First Name">
+        </div>
+
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Last Name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input name="email" type="text" placeholder="email">
+      </div>
+
+      <div class="field">
+        <label>Company</label>
+        <select name="company" class="ui dropdown">
+      <option value="">Select Company</option>
+      <option *ngFor="let item of companies" [value]="item.id">{{item.name}}</option>
+    </select>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Password">
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+<!-- -->
+
+<!-- Delete Modal -->
+<div class="ui modal" id="deleteModal">
+  <i class="close icon"></i>
+  <div class="header">
+    <div *ngIf="selected.length === 1">Delete Client</div>
+    <div *ngIf="selected.length > 1">Delete Clients</div>
+  </div>
+  <div class="content">
+    Are you sure ?
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Delete
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+<!-- -->

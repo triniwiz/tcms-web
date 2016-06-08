@@ -1,0 +1,28 @@
+<img class="login-bg"/>
+<div class="ui middle aligned center aligned grid">
+  <div class="column login-box">
+    <h1>TOSL Certificate Management System</h1>
+    <form class="ui large form">
+      <div class="ui raised stacked segment">
+        <div class="field">
+          <div class="ui input" [class.disabled]="isLogingIn">
+            <input required [(ngModel)]="user.email" type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui input" [class.disabled]="isLogingIn">
+            <input required [(ngModel)]="user.password" type="password" placeholder="password">
+          </div>
+        </div>
+        <div class="field">
+          <button (click)="login(user)" class="ui button fluid">
+            <p *ngIf="!isLogingIn" >Log In</p>
+            <div *ngIf="isLogingIn" class="ui active inverted dimmer">
+              <div class="ui text loader">Loading please wait ...</div>
+            </div>
+            </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

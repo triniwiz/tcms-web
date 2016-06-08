@@ -1,0 +1,16 @@
+<div class="ui top attached sticky menu">
+  <a class="item" (click)="toggleMenu()">
+    <i class="sidebar icon"></i> Menu
+  </a>
+  <div class="right menu">
+    <div class="ui dropdown item" (click)="toggleDropdown()" id="user-dropdown">
+      Logout
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a (click)="logOut()" class="item">
+        Log Out
+      </a>
+      </div>
+    </div>
+  </div>
+</div>

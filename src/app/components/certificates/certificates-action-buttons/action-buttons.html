@@ -1,0 +1,5 @@
+ <div class="ui right floated table-icons">
+        <i (click)="addCertificate()"  class="ui plus icon"></i>
+        <i *ngIf="selected.length == 1" (click)="editCertificate()" class="ui edit icon"></i>
+        <i *ngIf="selected.length > 0" (click)="deleteCertificate()" class="ui trash icon"></i>
+    </div>
